@@ -1,73 +1,93 @@
-# ICT Conscript Admission Test
-Thank you for taking interest in applying into our ICT Conscript Program. 
+# TaskUnit Logbook (SQLite-pohjainen)
 
-In this repository you will find our **Admission Test** to the program. 
+Tämä projekti on osa ICT-varusmieshaun valintatehtävää. Se on yksinkertainen sovellus, joka tallentaa ja näyttää partiointi-/vartiointilokeja.
 
-# 1. What we are looking for?
-We’re looking for individuals who are eager to grow and contribute in the following roles:
-1. **Software Developer** - Backend/API development, Identity Provider integrations (IdPs), frontend development (web or mobile)
-2. **Devops/Infra Developer** - Cloud platforms, Infrastructure-as-Code (e.g., Terraform), automation and CI/CD pipelines (e.g., GitHub Actions), platform operations
-3. **PX/Product Designer** -  User experience design, wireframing, user communication, early product scoping
-4. **Product Owner/Scrum Master** - Supporting development teams through leadership and operational coordination. Responsibilities may include: stakeholder management, backlog prioritization, customer satisfaction, and team rituals
+## 🔧 Miksi SQLite?
+
+Halusin käyttää SQL-palvelinta (kuten PostgreSQL), mutta minulla ei ollut tarpeeksi aikaa. Siksi valitsin **SQLite**:n, koska se on kevyt ja nopea ottaa käyttöön ilman erillistä palvelinta.
+
+## 🛠️ Käytetyt teknologiat
+
+- **FastAPI** – Backend-sovelluskehys
+- **SQLite** – Paikallinen tietokanta
+- **SQLAlchemy** – ORM SQLite:lle
+- **Uvicorn** – Sovelluspalvelin
+- **Render.com** – Julkinen hostaus
+
+## 🗂 Hakemistorakenne
+
+TaskUnit_Logbook_With_SQLite/ │ ├── main.py                # FastAPI-sovelluksen päälogiikka ├── database.py            # SQLite-yhteys ja tietokantamalli ├── models.py              # SQLAlchemy-mallit ├── schemas.py             # Pydantic-tietomallit ├── requirements.txt       # Riippuvuudet └── sample-data/           # Esimerkkitietoa
+
+## 🚀 Kuinka suorittaa paikallisesti
+
+1. Asenna riippuvuudet:
+
+```bash
+pip install -r requirements.txt
+
+2. Käynnistä palvelin:
 
 
-# 2. How do I perform the Admission Test?
-The process is straightforward: choose a task, fork the repository, complete your work, and submit it. Follow the steps below carefully:
-### 1. Tasks are located in the **/challenges folder**. 
-- All tasks are located in the /challenges folder.
-- Pick the task that interests you the most.
-✅ You only need to complete one task—not all of them.
-. Each task will be assessed independently (per-task assessment).
-🔄 Completing multiple tasks does not necessarily improve your standing. We are selecting people for different roles, not based on volume.
 
-### 3. Fork the repo (IMPORTANT) & Do!
-- Fork this repository to your GitHub account (e.g., https://github.com/yourusername/test-ictadmission).
-- Complete your selected task(s) directly in the forked repository.
-- If your work includes external content (e.g., Figma, slides, diagrams), link everything clearly in your fork’s README.md.
-- Ensure that your forked repository is public, so we can access it without issues.
+uvicorn main:app --reload
 
-📝 For UX Designers (Type 3) or Product Owners/Scrum Masters (Type 4):
-Make sure to link all deliverables (e.g., wireframes, research notes, plans) in your README.md.
+3. Avaa selain:
 
-### 4. Submit your Admission Test
-Once your test is ready, send an email to: ```ictvmhaku.pvjjk (at) mil.fi```
-Include the following in your message:
-- Your full name
-- A link to your forked, public GitHub repository
-- See the format below, use that!
 
-⚠️ All other documentation should already be in your repository. Do not include additional details in the email.
 
-**You can return an incomplete Test** (a task that fails to fulfill the given goals) **as well. If you do so, please detail in your email why you couldn't complete the task.**
+http://127.0.0.1:8000/docs
 
-### 5. Await pre-selection results
-After submitting your test:
-- We will evaluate your work.
-- Based on both your OmaIntti application and Admission Test, if applicable, we’ll decide if you move to the interview stage.
+Voit testata REST-rajapintaa interaktiivisesti Swagger UI:n kautta.
 
-You will be notified if you are selected for an interview.
+🌐 Testaus Render.com-palvelussa
 
-Final selections are made after all interviews are completed.
+Sovellus on julkaistu Render.comissa:
 
-## 3 Format of mail to return your Test
-```Mailto: ictvmrekry.pvjjk at mil.fi
-Subject: Your Surname/ICT-varusmieshaun valintatehtävä suoritettu
+🔗 https://test-ictconscript-admission-h6o6.onrender.com
 
-Hei!
+Kokeile API:a täällä:
 
-Olen aloittanut palvelukseni saapumiserässä II/25 ja olen hakenut OmaIntti.fi:ssä ICT-varusmieheksi.
+https://test-ictconscript-admission-h6o6.onrender.com/docs
 
-Suoritin ohessa seuraavan valintatehtävän:
-- 01a-swdev-front 
-- (listaa, jos teit useamman tehtävän)
+✅ Esimerkki POST /entries
 
-Tehtävä on tarkastettavissa täällä:
-https://github.com/(your github user)/your-repository
+Luo uusi lokimerkintä:
 
-OmaNimi
-````
+{
+  "title": "Yöpartiointi valmis",
+  "body": "Kaikki kunnossa pääportilla.",
+  "lat": 60.1503,
+  "lon": 25.0293
+}
 
-Make sure to follow the return instructions closely.
+⏱️ Huom: Sovellus lisää automaattisesti id-kentän ja isoTime-ajan.
 
-### Thank you!
-```- The ICT Conscript Program team```
+🧪 Testaus Postmanilla
+
+1. Avaa Postman.
+
+
+2. Luo uusi POST-pyyntö osoitteeseen:
+
+
+
+https://test-ictconscript-admission-h6o6.onrender.com/entries
+
+3. Valitse välilehti Body → raw → JSON ja lisää JSON-data (katso yllä).
+
+
+4. Paina Send.
+
+
+
+📎 Linkit
+
+Repo: test-ictconscript-admission
+
+Tehtävä: TaskUnit_Logbook_With_SQLite-kansio
+
+---
+
+Kiitos mahdollisuudesta! 🙏
+
+YT.Abdulhadi Labanie
